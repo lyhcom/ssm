@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mybatis01.mapper.CustomerMapper">
+
+    <resultMap id="row" type="com.zking.mybatis01.model.TCustomerEntity">
+        <id column="customer_id" property="customerId" javaType="java.lang.Integer"/>
+        <result column="customer_name" property="customerName" javaType="java.lang.String"/>
+
+        <!-- 配置一对多的关系，一个客户可以有多个订单 -->
+        <collection property="orders" ofType="com.zking.mybatis01.model.TOrderEntity">
+            <id column="order_id" property="orderId" javaType="java.lang.Integer"/>
+            <result column="order_no" property="orderNo" javaType="java.lang.String"/>
+            <result column="cid" property="cid" javaType="java.lang.Integer"/>
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="row">
+      select t1.customer_id,t1.customer_name, t2.order_id, t2.order_no, t2.cid
+      from t_customer t1 inner join t_order t2 on t1.customer_id = t2.cid
+      <where>
+
+          <if test="paramMap != null and paramMap.size != 0">
+              and t1.customer_name like concat('%', #{paramMap.name}, '%')
+          </if>
+
+      </where>
+    </select>
+
+</mapper>

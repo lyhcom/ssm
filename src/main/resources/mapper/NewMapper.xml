@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mybatis01.mapper.NewMapper">
+
+    <resultMap id="newsRow" type="com.zking.mybatis01.model.TNews">
+        <id column="news_id" property="newsId" javaType="java.lang.Integer"/>
+        <result column="title" property="title" javaType="java.lang.String"/>
+        <collection property="categorys" ofType="com.zking.mybatis01.model.TCategory">
+            <id column="category_id" property="categoryId" javaType="java.lang.Integer"/>
+            <result column="category_name" property="categoryName" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="newsRow">
+    SELECT t1.news_id, t1.title, t3.category_id,t3.category_name FROM t_news t1
+             LEFT JOIN t_news_category t2 ON t1.news_id = t2.nid
+             LEFT JOIN t_category t3 ON t2.cid = t3.category_id
+    </select>
+
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mybatis01.mapper.StudentMapper">
+
+    <cache
+            type="com.zking.mybatis01.util.RedisCache"
+            eviction="LRU"
+            flushInterval="6000000"
+            size="1024"
+            readOnly="false"
+    />
+
+    <!--定义查询结果与实体之间的映射-->
+    <resultMap id="row" type="com.zking.mybatis01.model.TStudentEntity">
+        <id column="sid" property="sid" javaType="java.lang.Integer"/>
+        <result column="sname" property="sname" javaType="java.lang.String"/>
+        <result column="sname_pinyin" property="snamePinyin" javaType="java.lang.String"/>
+        <result column="age" property="age" javaType="java.lang.Integer"/>
+        <result column="remark" property="remark" javaType="java.lang.String"/>
+    </resultMap>
+
+    <!--paramterType 指定参数类型-->
+    <insert id="add" parameterType="com.zking.mybatis01.model.TStudentEntity" useGeneratedKeys="true" keyProperty="sid">
+      INSERT INTO t_student(sname, age, remark, sname_pinyin)
+      VALUES (#{sname,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{snamePinyin,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="edit" parameterType="com.zking.mybatis01.model.TStudentEntity">
+        UPDATE t234.t_student
+        <set>
+            <if test="sname != null and sname != ''">
+                sname = #{sname},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="snamePinyin != null and snamePinyin != ''">
+                sname_pinyin = #{snamePinyin},
+            </if>
+        </set>
+        WHERE sid = #{sid};
+    </update>
+
+    <sql id="stuInfoColumn">
+        sname, age, remark,sname_pinyin, sid
+    </sql>
+
+    <!-- parameterType指定参数类型， resultMap指定参数row已在上面定义，用于指定结果与实体间的映射 -->
+    <select id="load" parameterType="com.zking.mybatis01.model.TStudentEntity" resultMap="row">
+      select <include refid="stuInfoColumn"/>
+      from t_student where sid = #{sid}
+    </select>
+
+    <select id="list" parameterType="com.zking.mybatis01.vo.StudentVO" resultMap="row">
+        select <include refid="stuInfoColumn"/> from t_student
+        <where>
+            <choose>
+                <!-- 这样可以实现模糊查询，但不建议这样做，使用${}形式不安全，容易受sql注入攻击
+                <when test="sname != null and sname != ''">
+                    and sname like '%${sname}%'
+                </when> -->
+                <when test="sname != null and sname != ''">
+                    and sname like concat('%', #{sname}, '%')
+                </when>
+
+                <when test="sids != null and sids.size !=0">
+                    and sid in
+                    <foreach collection="sids"  item="sid" open="(" close=")" separator=",">
+                        #{sid}
+                    </foreach>
+                </when>
+            </choose>
+        </where>
+    </select>
+
+
+</mapper>
