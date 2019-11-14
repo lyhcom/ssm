@@ -43,6 +43,9 @@
 
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <lombok.version>1.18.8</lombok.version>
+
+        <jstl-version>1.2</jstl-version>
+        <taglib-version>1.1.2</taglib-version>
     </properties>
 
     <dependencies>
@@ -171,11 +174,11 @@
             <version>${spring.version}</version>
         </dependency>
         <!--6)springMVC框架目前用不着，下门课程-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-webmvc</artifactId>-->
-        <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <!--7)spring对ehcache的相关支持-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -298,6 +301,20 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- ********************** JSTL依赖 ********************** -->
+        <!-- 缺少下面的这两个jar包会报java.lang.NoClassDefFoundError: javax/servlet/jsp/jstl/core/Config-->
+        <!-- 原因：org.springframework.web.servlet.view.JstlView在视图解析时需要这二个jar包-->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>${taglib-version}</version>
         </dependency>
 
     </dependencies>
