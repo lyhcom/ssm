@@ -59,7 +59,7 @@
         <!--此参数可以不配置，默认值为：/WEB-INF/springmvc-servlet.xml-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>WEB-INF/spring-mvc.xml</param-value>
+            <param-value>classpath:spring-mvc.xml</param-value>
         </init-param>
         <!--表示容器启动时就加载该servlet-->
         <load-on-startup>1</load-on-startup>
