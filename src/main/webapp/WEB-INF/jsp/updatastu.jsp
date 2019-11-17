@@ -14,7 +14,7 @@
 </head>
 <body>
 <p>
-    <f:form action="${ctx}/students/save" modelAttribute="student" method="post">
+    <f:form action="${ctx}/students/update" modelAttribute="student" method="post">
         学号：<f:input path="sid"></f:input> </br>
         姓名：<f:input path="sname"></f:input> </br>
         年龄：<f:input path="age"></f:input> </br>

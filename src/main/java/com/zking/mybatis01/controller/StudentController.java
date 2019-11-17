@@ -4,6 +4,7 @@ import com.zking.mybatis01.model.TStudentEntity;
 import com.zking.mybatis01.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,8 +42,8 @@ public class StudentController {
     // model.addAttribute("student", new TStudentEntity());
     //}
 
-    @RequestMapping("/add")
-    public String add(Model model) {
+    @RequestMapping("/addPage")
+    public String addPage(Model model) {
         System.out.println("--------------------------");
 
         //必须加入句，作用是给springmvc的form标签提供数据，否则会报异常
@@ -51,14 +52,25 @@ public class StudentController {
     }
 
 
-    @RequestMapping("/save")
-    public String save(TStudentEntity student) {
+    @RequestMapping("/add")
+    public String add(TStudentEntity student, BindingResult bindingResult) {
 
-        if(student.getSid() != null) {
-            studentService.edit(student);
-        } else {
-            studentService.add(student);
+        if(bindingResult.hasErrors()) {
+            return "addstu";
         }
+        studentService.add(student);
+        return "index";
+    }
+
+
+    @RequestMapping("/update")
+    public String update(TStudentEntity student, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "updatastu";
+        }
+
+        studentService.edit(student);
         System.out.println(student);
 
         return "index";
@@ -74,8 +86,8 @@ public class StudentController {
      * @param model 该参数用于为页面传值，修改页面的form表单通过modelAttribute属性接收值
      * @return 定义转发到的页面
      */
-    @RequestMapping("/update")
-    public String update(TStudentEntity student, Model model) {
+    @RequestMapping("/updatePage")
+    public String updatePage(TStudentEntity student, Model model) {
         TStudentEntity stu = studentService.load(student);
         model.addAttribute("student", stu);
         return "updatastu";

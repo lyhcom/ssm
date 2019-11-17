@@ -34,7 +34,7 @@
         2）显示modelAttribute属性指定的对象的属性值，modelAttribute属性指定的对象名称在Controller中通过Model对象
            带给页面作用域，若在Controller中没有对应的设置，则页面会报错，此处可以与Controller结合起来理解。
         -->
-        <f:form action="${ctx}/students/save" modelAttribute="student" method="post">
+        <f:form action="${ctx}/students/add" modelAttribute="student" method="post">
             <%--添加时不需要sid属性--%>
             <%--学号：<f:input path="sid"></f:input> </br>--%>
             姓名：<f:input path="sname"></f:input> </br>

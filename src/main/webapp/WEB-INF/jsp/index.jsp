@@ -9,8 +9,8 @@
 
     <a href="<%=request.getContextPath()%>/i18n/change"><t:message code="language"/></a>
 
-    <li><a href="<%=request.getContextPath()%>/students/add"><t:message code="stu.add"/></a></li>
-    <li><a href="<%=request.getContextPath()%>/students/update?sid=6" ><t:message code="stu.upate"/></a></li>
+    <li><a href="<%=request.getContextPath()%>/students/addPage"><t:message code="stu.add"/></a></li>
+    <li><a href="<%=request.getContextPath()%>/students/updatePage?sid=6" ><t:message code="stu.upate"/></a></li>
     <li><a href="<%=request.getContextPath()%>/uploadPage"><t:message code="upload"/></a></li>
 
 </ul>

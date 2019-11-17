@@ -2,6 +2,8 @@ package com.zking.mybatis01.model;
 
 import com.zking.mybatis01.util.PinYinUtil;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -11,10 +13,17 @@ import java.util.Objects;
 public class TStudentEntity {
 
     private Integer sid;
+
+    @NotBlank(message = "姓名不能为空")
     private String sname;
+
+    @NotNull(message = "年龄不能为空")
     private Integer age;
+
     private String remark;
+
     private String snamePinyin;
+
 
     public Integer getSid() {
         return sid;
