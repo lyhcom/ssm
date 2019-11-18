@@ -15,9 +15,9 @@
 <body>
 <p>
     <f:form action="${ctx}/students/update" modelAttribute="student" method="post">
-        学号：<f:input path="sid"></f:input> </br>
-        姓名：<f:input path="sname"></f:input> </br>
-        年龄：<f:input path="age"></f:input> </br>
+        学号：<f:input path="sid"></f:input><f:errors path="sid"/> </br>
+        姓名：<f:input path="sname"></f:input><f:errors path="sname"/> </br>
+        年龄：<f:input path="age"></f:input><f:errors path="age"/> </br>
         备注：<f:textarea path="remark"></f:textarea> </br>
         <input type="submit" value="提交">
     </f:form>

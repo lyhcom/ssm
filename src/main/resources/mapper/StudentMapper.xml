@@ -26,7 +26,7 @@
     </insert>
 
     <update id="edit" parameterType="com.zking.mybatis01.model.TStudentEntity">
-        UPDATE t234.t_student
+        UPDATE t_student
         <set>
             <if test="sname != null and sname != ''">
                 sname = #{sname},

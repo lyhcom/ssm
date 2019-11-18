@@ -12,12 +12,21 @@ import java.util.Objects;
  */
 public class TStudentEntity {
 
+    //定义分组接口
+    public static interface ValidataGroups {
+        public static interface Add {}
+        public static interface Edit {}
+    }
+
+    //定义验证规则
+    @NotNull(message="sid不能为空", groups = ValidataGroups.Edit.class)
     private Integer sid;
 
-    @NotBlank(message = "姓名不能为空")
+    //多个规则用“,”分割
+    @NotBlank(message = "姓名不能为空",groups = {ValidataGroups.Add.class, ValidataGroups.Edit.class})
     private String sname;
 
-    @NotNull(message = "年龄不能为空")
+    @NotNull(message = "年龄不能为空",groups = {ValidataGroups.Add.class, ValidataGroups.Edit.class})
     private Integer age;
 
     private String remark;

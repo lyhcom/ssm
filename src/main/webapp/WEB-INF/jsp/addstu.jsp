@@ -37,8 +37,9 @@
         <f:form action="${ctx}/students/add" modelAttribute="student" method="post">
             <%--添加时不需要sid属性--%>
             <%--学号：<f:input path="sid"></f:input> </br>--%>
-            姓名：<f:input path="sname"></f:input> </br>
-            年龄：<f:input path="age"></f:input> </br>
+            <f:errors path="*"/></br>
+            姓名：<f:input path="sname"></f:input></br>
+            年龄：<f:input path="age"></f:input></br>
             备注：<f:textarea path="remark"></f:textarea> </br>
             <input type="submit" value="提交">
         </f:form>

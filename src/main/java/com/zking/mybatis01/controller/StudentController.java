@@ -5,6 +5,7 @@ import com.zking.mybatis01.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,12 +36,9 @@ public class StudentController {
         List<String> grades = Arrays.asList("一年级", "二年级", "三年级", "四年级", "五年级", "六年级");
         //放入model以便于页面使用
         model.addAttribute("grades", grades);
+        //model.addAttribute("student", new TStudentEntity());
     }
 
-    //@ModelAttribute
-    //public void getStudent(Model model) {
-    // model.addAttribute("student", new TStudentEntity());
-    //}
 
     @RequestMapping("/addPage")
     public String addPage(Model model) {
@@ -53,8 +51,7 @@ public class StudentController {
 
 
     @RequestMapping("/add")
-    public String add(TStudentEntity student, BindingResult bindingResult) {
-
+    public String add(@Validated(TStudentEntity.ValidataGroups.Add.class) @ModelAttribute("student") TStudentEntity student, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "addstu";
         }
@@ -64,7 +61,7 @@ public class StudentController {
 
 
     @RequestMapping("/update")
-    public String update(TStudentEntity student, BindingResult bindingResult) {
+    public String update(@Validated(TStudentEntity.ValidataGroups.Edit.class) @ModelAttribute("student") TStudentEntity student, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             return "updatastu";
