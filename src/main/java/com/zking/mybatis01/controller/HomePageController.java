@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomePageController {
 
+    /*@RequestMapping("/")
+    public String goHome() {
+        return "redirect:/user/login";
+    }*/
+
     @RequestMapping("/")
     public String goHome() {
-        return "index";
+        return "login";
     }
 
 }

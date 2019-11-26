@@ -12,7 +12,7 @@
     <!--1) 注解驱动,用于激活已经在spring容器中注册过的bean上面的注解-->
     <!--<context:annotation-config/>-->
     <!-- 2) 用注解方式注入bean，并指定查找范围：com.zking.oa及子子孙孙包，使用了该注解后，context:annotation-config注解可以省略 -->
-    <context:component-scan base-package="com.zking.mybatis01">
+    <context:component-scan base-package="com.zking">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
