@@ -40,8 +40,8 @@
             <if test="snamePinyin != null and snamePinyin != ''">
                 sname_pinyin = #{snamePinyin},
             </if>
-        </set>
-        WHERE sid = #{sid};
+        </set> WHERE sid = #{sid};
+
     </update>
 
     <sql id="stuInfoColumn">

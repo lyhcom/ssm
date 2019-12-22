@@ -1,11 +1,8 @@
 package com.zking.mybatis01.service;
 
-import com.zking.mybatis01.model.TSysUser;
 import org.junit.Test;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Administrator
@@ -13,15 +10,23 @@ import static org.junit.Assert.*;
  */
 public class UserServiceImplTest extends BaseTest {
 
-    @Resource
-    private IUserService userService;
+//    @Resource
+//    private IUserService userService;
 
+    @Resource
+     private  IUserInfo iUserInfo;
 
     @Test
     public void load() {
+//        Userinfo u = new Userinfo();
+//        u.setBitState(1);
+//        u.setTusername("张三");
+//        u.setPhoneNumber("12314");
+//        u.setTpassword("12324353");
+//        int a  = iUserInfo.addUserInfo(u);
+//        System.out.println(a);
+        String code = "18570288570";
 
-        TSysUser user = userService.load("zhangsan");
-        System.out.println(user);
 
     }
 }

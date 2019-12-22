@@ -49,7 +49,7 @@
         </property>
     </bean>
 
-    <!-- Shiro生命周期，保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <!-- Shiro生命周期，管理shiro bean的生命周期 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
 </beans>
